@@ -24,3 +24,16 @@ export const postItems = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Poll already exists", question: error.keyValue.question, _status: res.statusCode });
     }
 }
+
+export const calculateTotal = async (req: Request, res: Response) => {
+    const { id, option } = req.params;
+    try {
+        const response = await poll.calculateTotalClicks(id, option);
+        
+        if (response === "OPTION_NOT_FOUND") return res.status(404).json({ message: "Option not found", _status: res.statusCode }) 
+
+        return res.json({ response, _status: res.statusCode });
+    } catch (error: any) {
+        return res.status(500).json({ error: error.message, _status: res.statusCode })
+    }
+}
