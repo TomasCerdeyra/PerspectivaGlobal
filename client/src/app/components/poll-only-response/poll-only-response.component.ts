@@ -7,5 +7,9 @@ import { Poll } from 'src/app/model/poll.interface';
   styleUrls: ['./poll-only-response.component.css']
 })
 export class PollOnlyResponseComponent {
-  @Input() poll: Poll = {photo:'', question: '', options: [], correctAnswer: ''};
+  @Input() poll: Poll = {photo:'', question: '', options: [], answer: ''};
+
+  calcularResult(){
+    
+  }
 }

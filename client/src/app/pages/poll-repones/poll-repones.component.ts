@@ -8,7 +8,7 @@ import { poll } from 'src/app/services/Poll.service';
   styleUrls: ['./poll-repones.component.css']
 })
 export class PollReponesComponent implements OnInit{
-  pollOnly: Poll = {photo:'', question: '', options: [], correctAnswer: ''};
+  pollOnly: Poll = {photo:'', question: '', options: [], answer: ''};
 
   constructor(private pollClass: poll){}
 

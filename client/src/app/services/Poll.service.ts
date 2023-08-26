@@ -6,24 +6,24 @@ const arrayPrueba: Poll[] = [
         photo: 'hola.com',
         question: 'Primera Encuesta piquete',
         options: ['true', 'true-true', 'false', 'false'],
-        correctAnswer: 'true-true',
+        answer: 'true-true',
     },
     {
         photo: 'hola.com.ar',
         question: 'Segunda Encuesta piquete',
         options: ['true', 'true-true', 'false', 'false'],
-        correctAnswer: 'true-true',
+        answer: 'true-true',
     },
     {
         photo: 'hola.com',
         question: 'Tercera Encuesta piquete',
         options: ['true', 'true-true', 'false', 'false'],
-        correctAnswer: 'true-true',
+        answer: 'true-true',
     },
 ]
 
 export class poll {
-    private pollResponse = new BehaviorSubject<Poll>({photo: '', question: '', options: [], correctAnswer: ''})
+    private pollResponse = new BehaviorSubject<Poll>({photo: '', question: '', options: [], answer: ''})
     pollResponse$ = this.pollResponse.asObservable()
 
     getPolls(): Poll[] {

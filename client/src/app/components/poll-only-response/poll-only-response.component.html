@@ -2,11 +2,13 @@
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">{{poll.question}}</h5>
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <button type="button" class="btn btn-outline-primary">{{poll.options[0]}}</button>
-            <button type="button" class="btn btn-outline-primary">{{poll.options[1]}}</button>
-            <button type="button" class="btn btn-outline-primary">{{poll.options[2]}}</button>
-            <button type="button" class="btn btn-outline-primary">Mid{{poll.options[3]}}</button>
+        <div class="btn-group" role="group" aria-label="Basic outlined example" *ngFor="let option of poll.options;">
+            <button type="button" class="btn btn-outline-primary" (click)="calcularResult()">{{option}}</button>
           </div>
     </div>
+    <div class="card">
+        <div class="card-body">
+          RESULTADOS:{{poll.options[0]}}: 15% | {{poll.options[1]}}: 15% | {{poll.options[2]}}: 20% | {{poll.options[3]}}: 50%
+        </div>
+      </div>
 </div>
