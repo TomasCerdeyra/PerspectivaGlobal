@@ -49,6 +49,11 @@ const schema = new mongoose.Schema<PollTypes>(
       max: 255,
       required: true
     },
+    clicks: {
+      type: [Number],
+      required: true,
+      default: []
+    },
     totalResponses: {
       type: Number,
       trim: true,

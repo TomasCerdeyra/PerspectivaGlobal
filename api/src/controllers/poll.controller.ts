@@ -26,10 +26,14 @@ export const postItems = async (req: Request, res: Response) => {
 }
 
 export const calculateTotal = async (req: Request, res: Response) => {
-    const { answer } = req.params;
+    const { id, option } = req.params;
     try {
-        const test = await poll.calculateTotal(answer)
-    } catch (error) {
-        console.error(error);
+        const response = await poll.calculateTotalClicks(id, option);
+        
+        if (response === "OPTION_NOT_FOUND") return res.status(404).json({ message: "Option not found", _status: res.statusCode }) 
+
+        return res.json({ response, _status: res.statusCode });
+    } catch (error: any) {
+        return res.status(500).json({ error: error.message, _status: res.statusCode })
     }
 }
