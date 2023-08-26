@@ -43,13 +43,18 @@ const schema = new mongoose.Schema<PollTypes>(
       required: true,
       unique: true,
     },
-    options: [answerSchema],
-    correctAnswer: {
-      type: String,
+    options: {
+      type: [String],
+      trim: true,
+      max: 255,
+      required: true
+    },
+    totalResponses: {
+      type: Number,
       trim: true,
       required: true,
-      max: 255,
-    },
+      default: 0
+    }
   },
   {
     timestamps: true,

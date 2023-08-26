@@ -22,12 +22,41 @@ class Poll {
     }
 
     public postPoll = async (body: PollTypes): Promise<string | PollTypes> => {
-        const { photo, question, options, correctAnswer } = body;
-        const postPoll = await this.collection.create(body);
-
-        if ([photo, question, options, correctAnswer].includes("")) return "EMPTY_FIELDS";
+        const { photo, question, options, totalResponses } = body;
         
-        return postPoll;
+        await this.collection.create(body);
+
+        if ([photo, question, options].includes("")) return "EMPTY_FIELDS";
+
+        const finalResponse = {
+            photo, 
+            question, 
+            options,
+            totalResponses: 0
+        }
+
+        return finalResponse;
+    }
+
+    // ! ARREGLAR PARA MAÑANA LO ANTES POSIBLE EEH
+    public calculateTotal = async (answer: string) => {
+        const polls = await this.collection.find().select("-createdAt -updatedAt");
+        let click: string | undefined = "";
+        
+        polls.map(poll => {
+            console.log(poll);
+            click = poll.options.find(option => option === answer)
+        })
+        console.log(click)
+        // await this.collection.updateOne({})
+        // console.log(polls.entries().next().value[1].options[0].firstAnswer)
+        // console.log(polls.entries().next().value[1].options[0].secondAnswer)
+        // console.log(polls.entries().next().value[1].options[0].thirdAnswer)
+        // console.log(polls.entries().next().value[1].options[0].fourthAnswer)
+        // polls.map(poll => {
+        //     poll.options.map(option => console.log(option.match(answer)))
+        // })
+        
     }
 }
 

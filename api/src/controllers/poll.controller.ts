@@ -24,3 +24,12 @@ export const postItems = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Poll already exists", question: error.keyValue.question, _status: res.statusCode });
     }
 }
+
+export const calculateTotal = async (req: Request, res: Response) => {
+    const { answer } = req.params;
+    try {
+        const test = await poll.calculateTotal(answer)
+    } catch (error) {
+        console.error(error);
+    }
+}
