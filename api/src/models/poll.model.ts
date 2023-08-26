@@ -8,7 +8,7 @@ const answerSchema = new mongoose.Schema({
     required: true,
     max: 255,
   },
-  secondAnwer: {
+  secondAnswer: {
     type: String,
     trim: true,
     required: true,
@@ -20,7 +20,7 @@ const answerSchema = new mongoose.Schema({
     required: true,
     max: 255,
   },
-  fourthAnwer: {
+  fourthAnswer: {
     type: String,
     trim: true,
     required: true,
