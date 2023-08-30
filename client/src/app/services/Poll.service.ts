@@ -1,38 +1,29 @@
 import { Poll } from "../model/poll.interface";
-import { BehaviorSubject } from "rxjs";
+import {HttpClient} from '@angular/common/http'
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
 
-const arrayPrueba: Poll[] = [
-    {
-        photo: 'hola.com',
-        question: 'Primera Encuesta piquete',
-        options: ['true', 'true-true', 'false', 'false'],
-        correctAnswer: 'true-true',
-    },
-    {
-        photo: 'hola.com.ar',
-        question: 'Segunda Encuesta piquete',
-        options: ['true', 'true-true', 'false', 'false'],
-        correctAnswer: 'true-true',
-    },
-    {
-        photo: 'hola.com',
-        question: 'Tercera Encuesta piquete',
-        options: ['true', 'true-true', 'false', 'false'],
-        correctAnswer: 'true-true',
-    },
-]
-
+@Injectable({
+    providedIn: 'root'
+})
 export class poll {
     private pollResponse = new BehaviorSubject<Poll>({photo: '', question: '', options: [], correctAnswer: ''})
     pollResponse$ = this.pollResponse.asObservable()
 
-    getPolls(): Poll[] {
+    
+    constructor(private http: HttpClient){}
+
+    getPolls(): Observable<Object> {
         //TODO: Hacer observable cuando tenga back
-        return arrayPrueba 
+        return  this.http.get('http://localhost:8080/lobby')
     }
 
-    getPoll(question: string): Poll | undefined {
-        return arrayPrueba.find(poll => poll.question === question)
+    getPoll(question: string): any {
+        this.getPolls().subscribe((poll) => {
+            let OptionId = poll
+            console.log(OptionId);
+        })
+        return this.http.get('/getItem/:id/calculateTotal/:option')
     }
 
     getPollResponse(question: string){

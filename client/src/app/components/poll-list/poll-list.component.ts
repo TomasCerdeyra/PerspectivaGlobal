@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Poll } from 'src/app/model/poll.interface';
 import { poll } from 'src/app/services/Poll.service';
 
+
 @Component({
   selector: 'app-poll-list',
   templateUrl: './poll-list.component.html',
@@ -12,8 +13,11 @@ export class PollListComponent implements OnInit{
   constructor(private pollClass: poll){}
 
   ngOnInit(): void {
-    this.pollList = this.pollClass.getPolls()
+    this.pollClass.getPolls().subscribe(
+        polls => {
+        this.pollList = polls.
+        console.log(this.pollList);
+      }
+    )
   }
-
-
 }

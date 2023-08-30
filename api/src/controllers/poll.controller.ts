@@ -37,3 +37,12 @@ export const calculateTotal = async (req: Request, res: Response) => {
         return res.status(500).json({ error: error.message, _status: res.statusCode })
     }
 }
+
+export const getItemMostSearched = async (req: Request, res: Response) => {
+    try {
+        const pollSearched = await poll.getMostSearchedPoll();
+        
+    } catch (error: any) {
+        return res.status(500).json({ error: error.message, _status: res.statusCode });
+    }
+}

@@ -13,6 +13,15 @@ class Poll {
     return getPoll;
   };
 
+  private _getAllPolls = async (): Promise<Array<PollTypes>> => {
+    const polls = await this.collection.find();
+    return polls;
+  }
+
+  private static _getMax = (responses: Array<number>) => {
+    
+  }
+
   public getAllPolls = async (): Promise<string | Array<PollTypes>> => {
     const getPolls = await this.collection.find();
 
@@ -63,6 +72,11 @@ class Poll {
       
     } else return "OPTION_NOT_FOUND";
   };
+
+  public getMostSearchedPoll = async () => {
+    const getPolls = await this._getAllPolls();
+    const totalResponses = getPolls.map(poll => poll.totalResponses);    
+  }
 }
 
 const poll = new Poll();

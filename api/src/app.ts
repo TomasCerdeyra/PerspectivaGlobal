@@ -17,4 +17,4 @@ app.get('/', (req: Request, res:Response) => res.status(301).redirect('/lobby'))
 app.get('*', (req: Request, res: Response) => res.status(404).json({ _message: `Route ${req.url} not found`, _status: res.statusCode }))
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log("Server running in http://localhost:8080"));
+app.listen(PORT, () => console.log(`Server running in http://localhost:${PORT}`));
