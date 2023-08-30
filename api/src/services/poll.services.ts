@@ -18,9 +18,13 @@ class Poll {
     return polls;
   }
 
-  private _getMax = (responses: Array<number>) => {
-    console.log(responses);
-
+  private _getMax = (responses: number[]): number => {
+    let getMostClicked = 0;
+    for (let i = 0; i < responses.length; i++) {
+      getMostClicked = Math.max(getMostClicked, responses[i]);
+    }
+      
+    return getMostClicked;
   }
 
   public getAllPolls = async (): Promise<string | Array<PollTypes>> => {
@@ -32,7 +36,7 @@ class Poll {
   };
 
   public getPollById = async (id: string): Promise<PollTypes | null> => {
-    const getPoll = await this.collection.findById({ _id: id });
+    const getPoll = await this.collection.findById({ _id: id }).select('-createdAt -updatedAt');
     return getPoll;
   }
 
@@ -80,10 +84,13 @@ class Poll {
     } else return "OPTION_NOT_FOUND";
   };
 
-  public getMostSearchedPoll = async () => {
+  public getMostSearchedPoll = async (): Promise<PollTypes | null> => {
     const getPolls = await this._getAllPolls();
     const totalResponses = getPolls.map(poll => poll.totalResponses);    
-    this._getMax(totalResponses);
+    const responses = this._getMax(totalResponses);
+    
+    const mostSearchedPoll = await this.collection.findOne({ totalResponses: responses }).select('-createdAt -updatedAt');
+    return mostSearchedPoll;
   }
 
 }

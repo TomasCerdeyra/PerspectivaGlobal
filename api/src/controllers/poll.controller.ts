@@ -56,7 +56,10 @@ export const calculateTotal = async (req: Request, res: Response) => {
 export const getItemMostSearched = async (req: Request, res: Response) => {
     try {
         const pollSearched = await poll.getMostSearchedPoll();
-        
+
+        if (pollSearched === null) return res.status(404).json({ message: "Poll not found", _status: res.statusCode });
+
+        return res.json({ pollMostSearched: pollSearched });
     } catch (error: any) {
         return res.status(500).json({ error: error.message, _status: res.statusCode });
     }
