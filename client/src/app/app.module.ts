@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -19,11 +20,12 @@ import { poll } from './services/Poll.service';
     PollComponent,
     PollReponesComponent,
     NotFoundComponent,
-    PollOnlyResponseComponent
+    PollOnlyResponseComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [poll],
   bootstrap: [AppComponent]
