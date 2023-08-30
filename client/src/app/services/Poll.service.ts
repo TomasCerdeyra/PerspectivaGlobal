@@ -1,13 +1,10 @@
 import { Poll } from "../model/poll.interface";
-import {HttpClient} from '@angular/common/http'
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class poll {
-    private pollResponse = new BehaviorSubject<Poll>({photo: '', question: '', options: [], correctAnswer: ''})
+    private pollResponse = new BehaviorSubject<Poll>({photo: '', question: '', options: [], answer: ''})
     pollResponse$ = this.pollResponse.asObservable()
 
     
