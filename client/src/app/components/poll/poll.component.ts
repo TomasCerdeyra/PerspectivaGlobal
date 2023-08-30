@@ -12,6 +12,7 @@ export class PollComponent {
 
   constructor(private pollClass: poll){}
 
+
   postResponsePoll(question: string){
    this.pollClass.getPoll(question)
    
