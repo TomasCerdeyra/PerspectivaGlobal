@@ -12,9 +12,8 @@ export class PollComponent {
 
   constructor(private pollClass: poll){}
 
-  postResponsePoll(){
-   /*  this.pollClass.getPollResponse(question) */
-   console.log('hola');
+  postResponsePoll(question: string){
+   this.pollClass.getPoll(question)
    
   }
 }

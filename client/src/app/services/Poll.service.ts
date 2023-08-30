@@ -13,17 +13,23 @@ export class poll {
     
     constructor(private http: HttpClient){}
 
-    getPolls(): Observable<Object> {
-        //TODO: Hacer observable cuando tenga back
+    getPolls(): Observable<object> {
         return  this.http.get('http://localhost:8080/lobby')
     }
 
     getPoll(question: string): any {
-        this.getPolls().subscribe((poll) => {
-            let OptionId = poll
-            console.log(OptionId);
+        let objId: string = ''
+        let opcion: string = ''
+        this.getPolls().subscribe((response: any) => {
+
+            response.polls.forEach((element: any) => {
+                if(element.question === question){
+                    objId = element._id
+                    opcion = element.options[element]
+                }
+            });  
         })
-        return this.http.get('/getItem/:id/calculateTotal/:option')
+        return this.http.get(`http://localhost:8080/lobby/getItem/${objId}`)
     }
 
     getPollResponse(question: string){
