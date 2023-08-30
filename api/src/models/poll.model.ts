@@ -49,6 +49,12 @@ const schema = new mongoose.Schema<PollTypes>(
       max: 255,
       required: true
     },
+    category: {
+      type: String,
+      trim: true,
+      max: 255,
+      required: true
+    },
     clicks: {
       type: [Number],
       required: true,
