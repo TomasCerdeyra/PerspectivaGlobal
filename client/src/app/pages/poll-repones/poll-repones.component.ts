@@ -8,13 +8,14 @@ import { poll } from 'src/app/services/Poll.service';
   styleUrls: ['./poll-repones.component.css']
 })
 export class PollReponesComponent implements OnInit{
-  poll: Poll = {photo:'', question: '', options: [], correctAnswer: ''};
+  pollOnly: Poll = {photo:'', question: '', options: [], answer: ''};
 
   constructor(private pollClass: poll){}
 
   ngOnInit(): void {
     this.pollClass.pollResponse$.subscribe((poll) => {
-      poll = poll
+      console.log(poll);
+      this.pollOnly = poll
     })
   }
 }

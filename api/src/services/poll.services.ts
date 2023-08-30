@@ -18,8 +18,9 @@ class Poll {
     return polls;
   }
 
-  private static _getMax = (responses: Array<number>) => {
-    
+  private _getMax = (responses: Array<number>) => {
+    console.log(responses);
+
   }
 
   public getAllPolls = async (): Promise<string | Array<PollTypes>> => {
@@ -29,6 +30,11 @@ class Poll {
 
     return getPolls;
   };
+
+  public getPollById = async (id: string): Promise<PollTypes | null> => {
+    const getPoll = await this.collection.findById({ _id: id });
+    return getPoll;
+  }
 
   public postPoll = async (body: PollTypes): Promise<string | PollTypes> => {
     const { photo, question, options } = body;
@@ -76,7 +82,9 @@ class Poll {
   public getMostSearchedPoll = async () => {
     const getPolls = await this._getAllPolls();
     const totalResponses = getPolls.map(poll => poll.totalResponses);    
+    this._getMax(totalResponses);
   }
+
 }
 
 const poll = new Poll();

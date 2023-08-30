@@ -13,6 +13,17 @@ export const getItems = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+export const getItemById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const uniquePoll = await poll.getPollById(id);
+        return res.json({ poll: uniquePoll, _status: res.statusCode })
+    } catch (error: any) {
+        if (error.kind === 'ObjectId') return res.status(404).json({ message: `Poll with ID ${id} not found`, _status: res.statusCode });       
+    }
+}
+
+
 export const postItems = async (req: Request, res: Response) => {
     try {
         const postItem = await poll.postPoll(req.body);
