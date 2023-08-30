@@ -24,7 +24,7 @@ class Poll {
   }
 
   public getAllPolls = async (): Promise<string | Array<PollTypes>> => {
-    const getPolls = await this.collection.find();
+    const getPolls = await this.collection.find().select('-createdAt -updatedAt');
 
     if (getPolls.length === 0) return "POLLS_UNEXISTENT";
 
@@ -37,16 +37,17 @@ class Poll {
   }
 
   public postPoll = async (body: PollTypes): Promise<string | PollTypes> => {
-    const { photo, question, options } = body;
+    const { photo, question, options, category } = body;
 
     await this.collection.create(body);
 
-    if ([photo, question, options].includes("")) return "EMPTY_FIELDS";
+    if ([photo, question, options, category].includes("")) return "EMPTY_FIELDS";
 
     const finalResponse = {
       photo,
       question,
       options,
+      category,
       clicks: [],
       totalResponses: 0,
     };
