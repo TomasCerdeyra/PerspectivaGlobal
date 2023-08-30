@@ -11,6 +11,4 @@ export class PollComponent {
   @Input() poll!: Poll;
 
   constructor(private pollClass: poll){}
-
-  }
 }
