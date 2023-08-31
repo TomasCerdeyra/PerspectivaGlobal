@@ -17,9 +17,13 @@ export const getItemById = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
         const uniquePoll = await poll.getPollById(id);
+
+        if (uniquePoll === null) return res.status(404).json({ message: `Poll with ID ${id} not found`, _status: res.statusCode });
+
         return res.json({ poll: uniquePoll, _status: res.statusCode })
     } catch (error: any) {
-        if (error.kind === 'ObjectId') return res.status(404).json({ message: `Poll with ID ${id} not found`, _status: res.statusCode });       
+        // if (error.kind === 'ObjectId') return res.status(404).json({ message: `Poll with ID ${id} not found`, _status: res.statusCode });       
+        return res.status(500).json({ error: error.message, _status: res.statusCode });
     }
 }
 
@@ -52,7 +56,10 @@ export const calculateTotal = async (req: Request, res: Response) => {
 export const getItemMostSearched = async (req: Request, res: Response) => {
     try {
         const pollSearched = await poll.getMostSearchedPoll();
-        
+
+        if (pollSearched === null) return res.status(404).json({ message: "Poll not found", _status: res.statusCode });
+
+        return res.json({ pollMostSearched: pollSearched });
     } catch (error: any) {
         return res.status(500).json({ error: error.message, _status: res.statusCode });
     }
