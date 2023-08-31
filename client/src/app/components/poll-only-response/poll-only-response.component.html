@@ -1,9 +1,24 @@
-<!-- <div class="card" style="width: 40rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">{{poll.question}}</h5>
-        <div class="btn-group" style="display: flex;" role="group" aria-label="Basic outlined example" *ngFor="let option of poll.options;">
-            <button type="button" class="btn btn-outline-primary" (click)="calcularResult()">{{option}}</button>
-          </div>
-    </div>
-</div> 
+<ng-container *ngIf="poll === undefined; else elseTemplate">
+    <p>cargando</p>
+</ng-container>
+<ng-template #elseTemplate>
+    <div class="card" style="width: 40rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{poll.poll.question}}</h5>
+            <div class="btn-group" style="display: flex;" role="group" aria-label="Basic outlined example" *ngFor="let option of poll.poll.options;">
+                <button type="button" class="btn btn-outline-primary" (click)="calcularResult(option)" [disabled]="click">{{option}}</button>
+            </div>
+        </div>
+        <div>
+            <p>Total votos {{resoult.canVotes}}</p>
+            <p>{{resoult.percentaje0ption0 | number:'1.2-2'}} %</p>
+            <p>{{resoult.percentaje0ption1 | number:'1.2-2'}} %</p>
+            <p>{{resoult.percentaje0ption2 | number:'1.2-2'}} %</p>
+            <p>{{resoult.percentaje0ption3 | number:'1.2-2'}} %</p>
+        </div>
+    </div>  
+</ng-template>
+
+
+

@@ -15,7 +15,7 @@ const routes: Routes = [
     component: HomePageComponent
   },
   {
-    path: 'poll',
+    path: 'poll/:id',
     component: PollReponesComponent
   },
   {

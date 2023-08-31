@@ -13,8 +13,13 @@ export class PollListComponent implements OnInit{
   constructor(private pollClass: poll){}
 
   ngOnInit(): void {
-    this.pollClass.getPolls().subscribe((data: any) => {
-      this.pollList = data.polls 
-    })
+    this.pollClass.getPolls().subscribe(
+      {
+        next: (data: any) => {
+          this.pollList = data.polls 
+        },
+        error: (error) => console.log(error),
+        complete: () => console.log('peticion complete')
+      })
   }
 }

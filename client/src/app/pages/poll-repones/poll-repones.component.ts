@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Poll } from 'src/app/model/poll.interface';
 import { poll } from 'src/app/services/Poll.service';
 
@@ -7,15 +7,6 @@ import { poll } from 'src/app/services/Poll.service';
   templateUrl: './poll-repones.component.html',
   styleUrls: ['./poll-repones.component.css']
 })
-export class PollReponesComponent implements OnInit{
-  pollOnly: Poll = {photo:'', question: '', options: [], answer: ''};
-
+export class PollReponesComponent {
   constructor(private pollClass: poll){}
-
-  ngOnInit(): void {
-    this.pollClass.pollResponse$.subscribe((poll) => {
-      console.log(poll);
-      this.pollOnly = poll
-    })
-  }
 }
