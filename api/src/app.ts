@@ -16,5 +16,6 @@ app.use('/lobby', routerPoll)
 app.get('/', (req: Request, res:Response) => res.status(301).redirect('/lobby'));
 app.get('*', (req: Request, res: Response) => res.status(404).json({ _message: `Route ${req.url} not found`, _status: res.statusCode }))
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server running in http://localhost:${PORT}`));
+const PORT: number = parseInt(process.env.PORT || '8080', 10);
+const HOST: string = process.env.HOST || '0.0.0.0';
+app.listen(PORT, HOST, () => console.log(`Server running in http://${HOST}:${PORT}`));
