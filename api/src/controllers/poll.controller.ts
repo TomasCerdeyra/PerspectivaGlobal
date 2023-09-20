@@ -64,3 +64,15 @@ export const getItemMostSearched = async (req: Request, res: Response) => {
         return res.status(500).json({ error: error.message, _status: res.statusCode });
     }
 }
+
+export const getItemByCategory = async (req: Request, res: Response) => {
+    try {
+        const items = await poll.getByCategory(req.params.category);
+        
+        if (items === "CATEGORY_NOT_FOUND") return res.status(404).json({ message: 'Category not found', _status: res.statusCode });
+
+        return res.json({ items });
+    } catch (error: any) {
+        return res.status(500).json({ error: error.message, _status: res.statusCode });
+    }
+}

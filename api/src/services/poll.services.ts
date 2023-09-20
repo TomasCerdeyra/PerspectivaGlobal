@@ -93,6 +93,14 @@ class Poll {
     return mostSearchedPoll;
   }
 
+  public getByCategory = async (category: string): Promise<string | PollTypes[]> => {
+    const getPollCategory = await this.collection.find({ category }).select('-createdAt -updatedAt');
+
+    if (getPollCategory.length === 0) return "CATEGORY_NOT_FOUND";
+    
+    return getPollCategory;
+  }
+
 }
 
 const poll = new Poll();
